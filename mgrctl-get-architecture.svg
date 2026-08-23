@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1180" viewBox="0 0 1200 1180">
+<style>
+  .title{font:700 26px Arial,sans-serif;fill:#172033}
+  .label{font:600 17px Arial,sans-serif;fill:#172033}
+  .sub{font:14px Arial,sans-serif;fill:#526071}
+  .small{font:13px Arial,sans-serif;fill:#526071}
+  .code{font:600 16px "SFMono-Regular",Consolas,monospace;fill:#172033}
+  .box{fill:#fff;stroke:#cbd5e1;stroke-width:2}
+  .accent{fill:#f8fafc;stroke:#64748b;stroke-width:2}
+  .api{fill:#f8fafc;stroke:#64748b;stroke-width:2}
+  .output{fill:#f8fafc;stroke:#64748b;stroke-width:2}
+  .arrow{stroke:#64748b;stroke-width:2.5;fill:none}
+  .line{stroke:#94a3b8;stroke-width:2;fill:none}
+</style>
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+    <path d="M0,0 L0,6 L9,3 z" fill="#64748b"/>
+  </marker>
+</defs>
+
+<text x="600" y="45" text-anchor="middle" class="title">mgrctl get — request flow and architecture</text>
+
+<!-- User -->
+<rect x="410" y="75" width="380" height="74" rx="14" class="box"/>
+<text x="600" y="106" text-anchor="middle" class="label">User</text>
+<text x="600" y="132" text-anchor="middle" class="code">mgrctl get &lt;resource&gt; [flags]</text>
+<path d="M600 149 L600 185" class="arrow" marker-end="url(#arrow)"/>
+
+<!-- CLI -->
+<rect x="290" y="195" width="620" height="115" rx="16" class="accent"/>
+<text x="600" y="228" text-anchor="middle" class="label">Command orchestration</text>
+<text x="600" y="254" text-anchor="middle" class="sub">Cobra command + Viper configuration</text>
+<text x="410" y="284" class="small">• Validate resource name / alias</text>
+<text x="670" y="284" class="small">• Initialize API client and authenticate</text>
+<path d="M600 310 L600 350" class="arrow" marker-end="url(#arrow)"/>
+
+<!-- Registry -->
+<rect x="390" y="360" width="420" height="70" rx="14" class="box"/>
+<text x="600" y="390" text-anchor="middle" class="label">Generic resource registry</text>
+<text x="600" y="414" text-anchor="middle" class="sub">Resolve resource → select typed fetcher</text>
+
+<!-- Split -->
+<path d="M600 430 L600 470 L310 470 L310 500" class="arrow" marker-end="url(#arrow)"/>
+<path d="M600 470 L890 470 L890 500" class="arrow" marker-end="url(#arrow)"/>
+
+<!-- System branch -->
+<rect x="80" y="510" width="460" height="250" rx="16" class="box"/>
+<text x="110" y="545" class="label">systemFetcher</text>
+<text x="110" y="574" class="sub">Typed resource: []System</text>
+<line x1="110" y1="595" x2="510" y2="595" class="line"/>
+<text x="110" y="628" class="code">listSystemsFiltered API</text>
+<text x="110" y="657" class="sub">Server-side filtering + pagination</text>
+<text x="110" y="686" class="sub">Capabilities validated by the resource</text>
+<rect x="110" y="705" width="160" height="35" rx="8" class="api"/>
+<text x="190" y="728" text-anchor="middle" class="small">[]System</text>
+
+<!-- Group branch -->
+<rect x="660" y="510" width="460" height="250" rx="16" class="box"/>
+<text x="690" y="545" class="label">systemGroupFetcher</text>
+<text x="690" y="574" class="sub">Typed resource: []SystemGroup</text>
+<line x1="690" y1="595" x2="1090" y2="595" class="line"/>
+<text x="690" y="628" class="code">listAllGroups API</text>
+<text x="690" y="657" class="sub">Client-side validation + sorting</text>
+<text x="690" y="686" class="sub">Complete list fetched before rendering</text>
+<rect x="690" y="705" width="200" height="35" rx="8" class="api"/>
+<text x="790" y="728" text-anchor="middle" class="small">[]SystemGroup</text>
+
+<!-- Merge -->
+<path d="M310 760 L310 800 L600 800" class="line"/>
+<path d="M890 760 L890 800 L600 800" class="line"/>
+<path d="M600 800 L600 840" class="arrow" marker-end="url(#arrow)"/>
+
+<!-- Output -->
+<rect x="180" y="850" width="840" height="185" rx="16" class="output"/>
+<text x="600" y="885" text-anchor="middle" class="label">Shared typed output layer</text>
+<text x="600" y="910" text-anchor="middle" class="sub">One rendering pipeline, multiple output formats</text>
+
+<rect x="220" y="935" width="140" height="42" rx="9" class="box"/><text x="290" y="961" text-anchor="middle" class="small">Table</text>
+<rect x="380" y="935" width="140" height="42" rx="9" class="box"/><text x="450" y="961" text-anchor="middle" class="small">JSON / YAML</text>
+<rect x="540" y="935" width="190" height="42" rx="9" class="box"/><text x="635" y="961" text-anchor="middle" class="small">Custom columns</text>
+<rect x="750" y="935" width="110" height="42" rx="9" class="box"/><text x="805" y="961" text-anchor="middle" class="small">JSONPath</text>
+
+<rect x="355" y="988" width="220" height="42" rx="9" class="box"/><text x="465" y="1014" text-anchor="middle" class="small">Custom-columns file</text>
+<rect x="595" y="988" width="250" height="42" rx="9" class="box"/><text x="720" y="1014" text-anchor="middle" class="small">Go template / template file</text>
+
+<path d="M600 1035 L600 1070" class="arrow" marker-end="url(#arrow)"/>
+
+<!-- stdout -->
+<rect x="300" y="1080" width="600" height="70" rx="14" class="accent"/>
+<text x="600" y="1110" text-anchor="middle" class="label">Clean stdout</text>
+<text x="600" y="1136" text-anchor="middle" class="sub">Readable for people · pipe-safe for shells · stable for scripts</text>
+</svg>
